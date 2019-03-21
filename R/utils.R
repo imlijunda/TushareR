@@ -18,10 +18,10 @@ fix_code <- function(code) toupper(code)
 cast_date <- function(date) {
   switch(date,
          POSIXct = function(x) as.POSIXct(x,
-                                          tz = tus.globals$timezone,
+                                          tz = "UTC",
                                           format = tus.globals$date_fmt),
          Date = function(x) as.Date(x,
-                                    tz = tus.globals$timezone,
+                                    tz = "UTC",
                                     format = tus.globals$date_fmt),
          char = as.character
   )
