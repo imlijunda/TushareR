@@ -14,3 +14,4 @@ list_date <- NULL
 out_date <- NULL
 setup_date <- NULL
 trade_time <- NULL
+fprg <- NULL

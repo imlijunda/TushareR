@@ -35,7 +35,8 @@ market_eod <- function(ts_code = "", trade_date = "", start_date = "", end_date 
     }
     #remove duplicated rows of adj_factor
     if (api == "adj_factor") {
-      dt <- unique(dt, by = "adj_factor")
+      dt[, fgrp := data.table::rleid(adj_factor)]
+      dt <- dt[, .SD[1L], by = fgrp][, fgrp := NULL]
     }
   }
 
