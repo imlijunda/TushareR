@@ -23,6 +23,18 @@ GetToken <- function() {
   tus.globals$api_token
 }
 
+#' Make raw request to Tushare Pro API
+#'
+#' @param api_name name of API function, please refer to online document for more information.
+#' @param ... passed to API function.
+#'
+#' @return data.frame/data.table
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' top10 <- TusRequest("top10_holders", ts_code = "000001.SZ")
+#' }
 TusRequest <- function(api_name, ...) {
 
   api_url <- "http://api.tushare.pro"
