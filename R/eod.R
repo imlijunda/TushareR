@@ -30,9 +30,9 @@ market_eod <- function(ts_code = "", trade_date = "", start_date = "", end_date 
     colfunc <- cast_date(date_format)
     dt[, trade_date := colfunc(trade_date)]
     if (trade_date == "") {
-      setkey(dt, trade_date)
+      data.table::setkeyv(dt, cols = "trade_date")
     } else {
-      setkey(dt, ts_code)
+      data.table::setkeyv(dt, cols = "ts_code")
     }
     #remove duplicated rows of adj_factor
     if (api == "adj_factor") {
@@ -76,7 +76,7 @@ intraday <- function(ts_code = "", start_time = "", end_time = "",
   if (nrow(dt)) {
     colfunc <- cast_time(time_format)
     dt[, trade_time := colfunc(trade_time)]
-    setkey(dt, trade_time)
+    data.table::setkeyv(dt, cols = "trade_time")
   }
 
   dt
@@ -112,9 +112,9 @@ suspend <- function(ts_code = "", suspend_date = "", resume_date="",
     dt[, suspend_date := colfunc(suspend_date)]
     dt[, resume_date := resume_date]
     if (suspend_date == "") {
-      setkey(dt, ts_code)
+      data.table::setkeyv(dt, cols = "ts_code")
     } else {
-      setkey(dt, suspend_date)
+      data.table::setkeyv(dt, cols = "suspend_date")
     }
   }
 

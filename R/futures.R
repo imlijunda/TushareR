@@ -43,6 +43,11 @@ futures_eod <- function(trade_date = "", symbol = "", start_date = "", end_date 
   if (nrow(ans)) {
     colfunc <- cast_date(date_format)
     ans[, trade_date := colfunc(trade_date)]
+    if (trade_date == "") {
+      data.table::setkeyv(ans, cols = "trade_date")
+    } else {
+      data.table::setkeyv(ans, cols = "symbol")
+    }
   }
 
   ans
@@ -64,6 +69,11 @@ futures_eod2 <- function(ts_code = "", trade_date = "", start_date = "", end_dat
   if (nrow(ans)) {
     colfunc <- cast_date(date_format)
     ans[, trade_date := colfunc(trade_date)]
+    if (trade_date == "") {
+      data.table::setkeyv(ans, cols = "trade_date")
+    } else {
+      data.table::setkeyv(ans, cols = "ts_code")
+    }
   }
 
   ans
