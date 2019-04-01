@@ -10,6 +10,10 @@
 \alias{fund_daily}
 \alias{opt_daily}
 \alias{index_daily}
+\alias{index_weekly}
+\alias{index_monthly}
+\alias{index_weight}
+\alias{index_dailybasic}
 \title{Daily stock market data.}
 \usage{
 daily(ts_code = "", trade_date = "", start_date = "",
@@ -37,6 +41,18 @@ opt_daily(ts_code = "", trade_date = "", start_date = "",
   end_date = "", date_format = c("POSIXct", "Date", "char"))
 
 index_daily(ts_code = "", trade_date = "", start_date = "",
+  end_date = "", date_format = c("POSIXct", "Date", "char"))
+
+index_weekly(ts_code = "", trade_date = "", start_date = "",
+  end_date = "", date_format = c("POSIXct", "Date", "char"))
+
+index_monthly(ts_code = "", trade_date = "", start_date = "",
+  end_date = "", date_format = c("POSIXct", "Date", "char"))
+
+index_weight(ts_code = "", trade_date = "", start_date = "",
+  end_date = "", date_format = c("POSIXct", "Date", "char"))
+
+index_dailybasic(ts_code = "", trade_date = "", start_date = "",
   end_date = "", date_format = c("POSIXct", "Date", "char"))
 }
 \arguments{

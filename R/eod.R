@@ -13,7 +13,8 @@ market_eod <- function(ts_code = "", trade_date = "", start_date = "", end_date 
                        date_format = c("POSIXct", "Date", "char"),
                        api = c("daily", "weekly", "monthly", "daily_basic", "adj_factor",
                                "moneyflow", "fund_daily", "fut_daily", "opt_daily",
-                               "index_daily")) {
+                               "index_daily", "index_weekly", "index_monthly",
+                               "index_weight", "index_dailybasic")) {
 
   ts_code <- fix_code(ts_code)
   trade_date <- fix_date(trade_date)
@@ -235,7 +236,7 @@ moneyflow <- function(ts_code = "", trade_date = "", start_date = "", end_date =
 #' @export
 #'
 fund_daily <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
-                      date_format = c("POSIXct", "Date", "char")) {
+                       date_format = c("POSIXct", "Date", "char")) {
 
   args <- list(ts_code = ts_code,
                trade_date = trade_date,
@@ -267,7 +268,7 @@ opt_daily <- function(ts_code = "", trade_date = "", start_date = "", end_date =
 #' @export
 #'
 index_daily <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
-                      date_format = c("POSIXct", "Date", "char")) {
+                        date_format = c("POSIXct", "Date", "char")) {
 
   args <- list(ts_code = ts_code,
                trade_date = trade_date,
@@ -275,6 +276,70 @@ index_daily <- function(ts_code = "", trade_date = "", start_date = "", end_date
                end_date = end_date,
                date_format = date_format,
                api = "index_daily")
+
+  do.call(market_eod, args)
+}
+
+#' @rdname daily
+#' @export
+#'
+index_weekly <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
+                         date_format = c("POSIXct", "Date", "char")) {
+
+  args <- list(ts_code = ts_code,
+               trade_date = trade_date,
+               start_date = start_date,
+               end_date = end_date,
+               date_format = date_format,
+               api = "index_weekly")
+
+  do.call(market_eod, args)
+}
+
+#' @rdname daily
+#' @export
+#'
+index_monthly <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
+                          date_format = c("POSIXct", "Date", "char")) {
+
+  args <- list(ts_code = ts_code,
+               trade_date = trade_date,
+               start_date = start_date,
+               end_date = end_date,
+               date_format = date_format,
+               api = "index_monthly")
+
+  do.call(market_eod, args)
+}
+
+#' @rdname daily
+#' @export
+#'
+index_weight <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
+                         date_format = c("POSIXct", "Date", "char")) {
+
+  args <- list(ts_code = ts_code,
+               trade_date = trade_date,
+               start_date = start_date,
+               end_date = end_date,
+               date_format = date_format,
+               api = "index_weight")
+
+  do.call(market_eod, args)
+}
+
+#' @rdname daily
+#' @export
+#'
+index_dailybasic <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
+                             date_format = c("POSIXct", "Date", "char")) {
+
+  args <- list(ts_code = ts_code,
+               trade_date = trade_date,
+               start_date = start_date,
+               end_date = end_date,
+               date_format = date_format,
+               api = "index_dailybasic")
 
   do.call(market_eod, args)
 }
