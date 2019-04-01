@@ -250,22 +250,6 @@ fund_daily <- function(ts_code = "", trade_date = "", start_date = "", end_date 
 #' @rdname daily
 #' @export
 #'
-fut_daily <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
-                       date_format = c("POSIXct", "Date", "char")) {
-
-  args <- list(ts_code = ts_code,
-               trade_date = trade_date,
-               start_date = start_date,
-               end_date = end_date,
-               date_format = date_format,
-               api = "fut_daily")
-
-  do.call(market_eod, args)
-}
-
-#' @rdname daily
-#' @export
-#'
 opt_daily <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
                       date_format = c("POSIXct", "Date", "char")) {
 

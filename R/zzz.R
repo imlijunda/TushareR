@@ -15,3 +15,6 @@ out_date <- NULL
 setup_date <- NULL
 trade_time <- NULL
 fprg <- NULL
+list_date <- NULL
+delist_date <- NULL
+last_ddate <- NULL

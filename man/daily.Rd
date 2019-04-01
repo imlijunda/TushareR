@@ -8,7 +8,6 @@
 \alias{adj_factor}
 \alias{moneyflow}
 \alias{fund_daily}
-\alias{fut_daily}
 \alias{opt_daily}
 \alias{index_daily}
 \title{Daily stock market data.}
@@ -32,9 +31,6 @@ moneyflow(ts_code = "", trade_date = "", start_date = "",
   end_date = "", date_format = c("POSIXct", "Date", "char"))
 
 fund_daily(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
-
-fut_daily(ts_code = "", trade_date = "", start_date = "",
   end_date = "", date_format = c("POSIXct", "Date", "char"))
 
 opt_daily(ts_code = "", trade_date = "", start_date = "",
