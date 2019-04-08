@@ -19,3 +19,6 @@ list_date <- NULL
 delist_date <- NULL
 last_ddate <- NULL
 trade_time <- NULL
+i.ts_code <- NULL
+high <- NULL
+low <- NULL

@@ -3,6 +3,7 @@
 export(SetToken)
 export(TusRequest)
 export(adj_factor)
+export(adjusted_ohlc)
 export(daily)
 export(daily_basic)
 export(fund_daily)
