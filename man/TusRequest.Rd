@@ -4,12 +4,16 @@
 \alias{TusRequest}
 \title{Make raw request to Tushare Pro API}
 \usage{
-TusRequest(api_name, ...)
+TusRequest(api_name, ..., timeout = 10, retry = 5L)
 }
 \arguments{
 \item{api_name}{name of API function, please refer to online document for more information.}
 
 \item{...}{passed to API function.}
+
+\item{timeout}{timeout in seconds for httr request.}
+
+\item{retry}{max retries if timeout.}
 }
 \value{
 data.frame/data.table
