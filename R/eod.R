@@ -38,6 +38,7 @@ market_eod <- function(ts_code = "", trade_date = "", start_date = "", end_date 
     if (api == "adj_factor") {
       dt[, fgrp := data.table::rleid(adj_factor)]
       dt <- dt[, .SD[1L], by = fgrp][, fgrp := NULL]
+      data.table::setkeyv(dt, cols = "trade_date")
     }
   }
 
