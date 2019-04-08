@@ -15,3 +15,11 @@ refer to the online document for details of the APIs.
 Prior to using TushareR, you need to set your API token by calling
 SetToken("YOUR_API_TOKEN").
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/imlijunda/TushareR}
+  \item Report bugs at \url{https://github.com/imlijunda/TushareR/issues}
+}
+
+}

@@ -5,6 +5,8 @@ Version: 0.0.1
 Author: Jun <imlijunda@gmail.com>
 Maintainer: Jun <imlijunda@gmail.com>
 Description: R interface to Tushare Pro API.
+URL: https://github.com/imlijunda/TushareR
+BugReports: https://github.com/imlijunda/TushareR/issues
 Imports: data.table, httr
 Encoding: UTF-8
 LazyData: true
