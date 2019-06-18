@@ -77,7 +77,7 @@ TimedPOST <- function(..., retry) {
 #' }
 TusRequest <- function(api_name, ..., timeout = 10.0, retry = 5L) {
 
-  api_url <- "http://api.tushare.pro"
+  api_url <- "http://api.waditu.com"
 
   args <- list(
     token = GetToken(),
