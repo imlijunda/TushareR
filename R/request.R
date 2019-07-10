@@ -32,7 +32,6 @@ GetToken <- function() {
 #'
 #' @return reponse
 #'
-#' @examples
 POSTRetry <- function(..., retry, sleep = 0, warn = TRUE) {
 
   args <- list(...)
@@ -65,6 +64,7 @@ POSTRetry <- function(..., retry, sleep = 0, warn = TRUE) {
 #'
 #' @param api_name name of API function, please refer to online document for more information.
 #' @param ... passed to API function.
+#' @param token API token.
 #' @param timeout timeout in seconds for httr request.
 #'
 #' @return data.frame/data.table
@@ -74,12 +74,12 @@ POSTRetry <- function(..., retry, sleep = 0, warn = TRUE) {
 #' \dontrun{
 #' top10 <- TusRequest("top10_holders", ts_code = "000001.SZ")
 #' }
-TusRequest <- function(api_name, ..., timeout = 5.0) {
+TusRequest <- function(api_name, ..., token = GetToken(), timeout = 5.0) {
 
   api_url <- "http://api.waditu.com"
 
   args <- list(
-    token = GetToken(),
+    token = token,
     api_name = api_name,
     params = list(...)
   )
