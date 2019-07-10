@@ -7,6 +7,7 @@
 \alias{daily_basic}
 \alias{adj_factor}
 \alias{moneyflow}
+\alias{stk_limit}
 \alias{fund_daily}
 \alias{opt_daily}
 \alias{index_daily}
@@ -14,7 +15,7 @@
 \alias{index_monthly}
 \alias{index_weight}
 \alias{index_dailybasic}
-\title{Daily stock market data.}
+\title{End-of-day market data.}
 \usage{
 daily(ts_code = "", trade_date = "", start_date = "",
   end_date = "", date_format = c("POSIXct", "Date", "char"))
@@ -32,6 +33,9 @@ adj_factor(ts_code = "", trade_date = "", start_date = "",
   end_date = "", date_format = c("POSIXct", "Date", "char"))
 
 moneyflow(ts_code = "", trade_date = "", start_date = "",
+  end_date = "", date_format = c("POSIXct", "Date", "char"))
+
+stk_limit(ts_code = "", trade_date = "", start_date = "",
   end_date = "", date_format = c("POSIXct", "Date", "char"))
 
 fund_daily(ts_code = "", trade_date = "", start_date = "",

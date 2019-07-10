@@ -6,9 +6,10 @@
 \usage{
 market_eod(ts_code = "", trade_date = "", start_date = "",
   end_date = "", date_format = c("POSIXct", "Date", "char"),
-  api = c("daily", "weekly", "monthly", "daily_basic", "adj_factor",
-  "moneyflow", "fund_daily", "fut_daily", "opt_daily", "index_daily",
-  "index_weekly", "index_monthly", "index_weight", "index_dailybasic"))
+  api = c("daily", "weekly", "monthly", "adj_factor", "daily_basic",
+  "moneyflow", "stk_limit", "index_daily", "index_weekly", "index_monthly",
+  "index_weight", "index_dailybasic", "fund_daily", "fut_daily",
+  "opt_daily"))
 }
 \arguments{
 \item{ts_code}{Tushare equity code}

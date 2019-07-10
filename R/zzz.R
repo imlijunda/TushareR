@@ -22,3 +22,4 @@ trade_time <- NULL
 i.ts_code <- NULL
 high <- NULL
 low <- NULL
+trade_time <- NULL

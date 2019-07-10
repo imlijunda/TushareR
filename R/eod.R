@@ -11,10 +11,11 @@
 #'
 market_eod <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
                        date_format = c("POSIXct", "Date", "char"),
-                       api = c("daily", "weekly", "monthly", "daily_basic", "adj_factor",
-                               "moneyflow", "fund_daily", "fut_daily", "opt_daily",
+                       api = c("daily", "weekly", "monthly", "adj_factor",
+                               "daily_basic", "moneyflow", "stk_limit",
                                "index_daily", "index_weekly", "index_monthly",
-                               "index_weight", "index_dailybasic")) {
+                               "index_weight", "index_dailybasic",
+                               "fund_daily", "fut_daily", "opt_daily")) {
 
   ts_code <- fix_code(ts_code)
   trade_date <- fix_date(trade_date)
@@ -111,7 +112,7 @@ suspend <- function(ts_code = "", suspend_date = "", resume_date="",
   if (nrow(dt)) {
     colfunc <- cast_date(date_format)
     dt[, suspend_date := colfunc(suspend_date)]
-    dt[, resume_date := resume_date]
+    dt[, resume_date := colfunc(resume_date)]
     if (suspend_date == "") {
       data.table::setkeyv(dt, cols = "ts_code")
     } else {
@@ -122,7 +123,7 @@ suspend <- function(ts_code = "", suspend_date = "", resume_date="",
   dt
 }
 
-#' Daily stock market data.
+#' End-of-day market data.
 #'
 #' Please refer to online document for details.
 #'
@@ -229,6 +230,22 @@ moneyflow <- function(ts_code = "", trade_date = "", start_date = "", end_date =
                end_date = end_date,
                date_format = date_format,
                api = "moneyflow")
+
+  do.call(market_eod, args)
+}
+
+#' @rdname daily
+#' @export
+#'
+stk_limit <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
+                      date_format = c("POSIXct", "Date", "char")) {
+
+  args <- list(ts_code = ts_code,
+               trade_date = trade_date,
+               start_date = start_date,
+               end_date = end_date,
+               date_format = date_format,
+               api = "stk_limit")
 
   do.call(market_eod, args)
 }
