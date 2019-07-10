@@ -23,30 +23,30 @@ GetToken <- function() {
   tus.globals$api_token
 }
 
-#' Wrapped httr::POST with retry for timeout error.
-#'
-#' Notes on TimedPOST: non-timeout errors are rethrown
+#' Wrapped httr::POST with retry. Rethrow errors as warnings.
 #'
 #' @param ... passed to httr::POST()
 #' @param retry max retries
+#' @param sleep seconds to sleep if error occurs
+#' @param warn whether to throw warnings if error occurs
 #'
-#' @return response
+#' @return reponse
 #'
-TimedPOST <- function(..., retry) {
+#' @examples
+POSTRetry <- function(..., retry, sleep = 0, warn = TRUE) {
 
   args <- list(...)
 
   flag <- FALSE
-  for (i in seq_len(retry + 1L)) {
+  for (i in seq_len(retry)) {
     ans <- tryCatch({
       do.call(httr::POST, args)
     }, error = function(e) {
-      if (grepl("Timeout", e$message, fixed = TRUE)) {
-        NULL
-      } else {
-        #Not timeout error, throw e
-        stop(e)
+      if (warn) {
+        warning(e$message)
       }
+      Sys.sleep(sleep)
+      NULL
     })
     if (!is.null(ans)) {
       flag <- TRUE
@@ -57,7 +57,7 @@ TimedPOST <- function(..., retry) {
   if (flag) {
     ans
   } else {
-    stop(sprintf("Timeouts were reached after %d retries.", retry))
+    stop(sprintf("Failed to POST after %d attempts.", retry))
   }
 }
 
@@ -66,7 +66,6 @@ TimedPOST <- function(..., retry) {
 #' @param api_name name of API function, please refer to online document for more information.
 #' @param ... passed to API function.
 #' @param timeout timeout in seconds for httr request.
-#' @param retry max retries if timeout.
 #'
 #' @return data.frame/data.table
 #' @export
@@ -75,7 +74,7 @@ TimedPOST <- function(..., retry) {
 #' \dontrun{
 #' top10 <- TusRequest("top10_holders", ts_code = "000001.SZ")
 #' }
-TusRequest <- function(api_name, ..., timeout = 10.0, retry = 5L) {
+TusRequest <- function(api_name, ..., timeout = 5.0) {
 
   api_url <- "http://api.waditu.com"
 
@@ -85,11 +84,12 @@ TusRequest <- function(api_name, ..., timeout = 10.0, retry = 5L) {
     params = list(...)
   )
 
-  req <- TimedPOST(url = api_url,
+  req <- POSTRetry(url = api_url,
                    config = httr::timeout(timeout),
                    body = args,
                    encode = "json",
-                   retry = retry)
+                   #retry settings
+                   retry = 3L, sleep = 2.0, warn = TRUE)
   res <- httr::content(
     req,
     as = "parsed",
@@ -111,10 +111,7 @@ TusRequest <- function(api_name, ..., timeout = 10.0, retry = 5L) {
       tmp <- lapply(res$data$items[!null_row], function(row) {
         lapply(row, function(x) if (is.null(x)) NA else x)
       })
-      #TODO performance: since the NULL replacements are not done in-place/by-ref,
-      #objects are copied and altered every loop thus slow. However, considering
-      #most time are spent in httr::POST and res$data is usually only a few hundred
-      #kilobytes this is not a big issue ATM.
+      #TODO performance opt
       data.table::rbindlist(tmp)
     })
   } else {
