@@ -2,16 +2,7 @@
 
 fix_date <- function(datetime) as.character(datetime, format = tus.globals$date_fmt)
 
-fix_time <- function(datetime) {
-
-  if ("POSIXt" %in% class(datetime)) {
-    fixed <- as.character(datetime, format = tus.globals$datetime_fmt)
-  } else {
-    fixed <- as.character(datetime, format = tus.globals$date_fmt)
-  }
-
-  fixed
-}
+fix_time <- function(datetime) as.character(datetime, format = tus.globals$datetime_fmt)
 
 fix_code <- function(code) toupper(code)
 
