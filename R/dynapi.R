@@ -95,21 +95,23 @@ arg_logical01 <- c("is_open", "is_new", "is_audit", "is_release", "is_buyback",
 
     args <- list(...)
 
+    #special treatment due to year-month date format
     if (func == "teleplay_record") {
       fix_date <- fix_date_teleplay
       time_format <- "char"
       date_format <- "char"
     }
 
-    for (name in names(args)) {
-      #convert date to proper str
-      if (name %in% arg_date) {
-        args[[name]] <- fix_date(args[[name]])
-      }
-      #convert time to proper str
-      if (name %in% arg_time) {
-        args[[name]] <- fix_time(args[[name]])
-      }
+    argn <- names(args)
+    #convert date to proper str
+    idx <- argn %in% arg_date
+    if (any(idx)) {
+      args[idx] <- lapply(args[idx], fix_date)
+    }
+    #convert time to proper str
+    idx <- argn %in% arg_time
+    if (any(idx)) {
+      args[idx] <- lapply(args[idx], fix_time)
     }
 
     args$api_name <- func
@@ -124,46 +126,50 @@ arg_logical01 <- c("is_open", "is_new", "is_audit", "is_release", "is_buyback",
     logi_format <- match.arg(logi_format)
     logi_col_cast <- cast_logical(logi_format)
 
-    cnames <- colnames(dt)
-    for (col in cnames) {
-      #convert date to proper datetime type
-      if (col %in% arg_date) {
-        set(dt, j = col, value = date_col_cast(dt[[col]]))
-      }
-      #convert time to proper datetime type
-      if (col %in% arg_time) {
-        set(dt, j = col, value = time_col_cast(dt[[col]]))
-      }
-      #convert 0/1 to proper logical value
-      if (col %in% arg_logical01) {
-        set(dt, j = col, value = logi_col_cast(dt[[col]]))
-      }
+    cols <- colnames(dt)
+    col <- which(cols %in% arg_date)
+    if (length(col)) {
+      #convert date string to proper date type
+      set(dt, j = col, value = lapply(dt[, ..col], date_col_cast))
     }
-    if ("ts_code" %in% cnames) {
+    col <- which(cols %in% arg_time)
+    if (length(col)) {
+      #convert time string to proper time type
+      set(dt, j = col, value = lapply(dt[, ..col], time_col_cast))
+    }
+    col <- which(cols %in% arg_logical01)
+    if (length(col)) {
+      #convert logi string to logical type
+      set(dt, j = col, value = lapply(dt[, ..col], logi_col_cast))
+    }
+
+    if ("ts_code" %in% cols) {
       if (all(dt$ts_code == dt$ts_code[1])) {
         #single ts_code returned, sort by date
-        if ("trade_date" %in% cnames) {
+        if ("trade_date" %in% cols) {
           #trade_date is present, sort by trade_date
           setkeyv(dt, "trade_date")
+        } else if ("trade_time" %in% cols) {
+          setkeyv(dt, "trade_time")
         } else {
           #this is a bit complitated
-          if (func == "namechange" && "start_date" %in% cnames) {
+          if (func == "namechange" && "start_date" %in% cols) {
             #sort by start_date
             setkeyv(dt, "start_date")
-          } else if (func == "share_float" && "float_date" %in% cnames) {
+          } else if (func == "share_float" && "float_date" %in% cols) {
             #sort by float_date
             setkeyv(dt, "float_date")
-          } else if (func == "stk_holdertrade" && "ann_date" %in% cnames) {
+          } else if (func == "stk_holdertrade" && "ann_date" %in% cols) {
             #sort by ann_date
             setkeyv(dt, "ann_date")
-          } else if (func == "fund_div" && "imp_anndate" %in% cnames) {
+          } else if (func == "fund_div" && "imp_anndate" %in% cols) {
             #sort by imp_anndate
             setkeyv(dt, "imp_anndate")
-          } else if (func == "anns" && "ann_date" %in% cnames) {
+          } else if (func == "anns" && "ann_date" %in% cols) {
             #sort by ann_date
             setkeyv(dt, "ann_date")
           } else {
-            if ("end_date" %in% cnames) {
+            if ("end_date" %in% cols) {
               setkeyv(dt, "end_date")
             }
           }
@@ -173,21 +179,23 @@ arg_logical01 <- c("is_open", "is_new", "is_audit", "is_release", "is_buyback",
         setkeyv(dt, "ts_code")
       }
     } else {
-      if ("trade_date" %in% cnames) {
+      if ("trade_date" %in% cols) {
         setkeyv(dt, "trade_date")
-      } else if ("cal_date" %in% cnames) {
+      } else if ("trade_time" %in% cols) {
+        setkeyv(dt, "trade_time")
+      } else if ("cal_date" %in% cols) {
         setkeyv(dt, "cal_date")
-      } else if ("code" %in% cnames) {
+      } else if ("code" %in% cols) {
         setkeyv(dt, "code")
-      } else if ("date" %in% cnames) {
+      } else if ("date" %in% cols) {
         setkeyv(dt, "date")
-      } else if ("index_code" %in% cnames) {
+      } else if ("index_code" %in% cols) {
         setkeyv(dt, "index_code")
-      } else if ("rec_no" %in% cnames) {
+      } else if ("rec_no" %in% cols) {
         setkeyv(dt, "rec_no")
-      } else if ("name" %in% cnames) {
+      } else if ("name" %in% cols) {
         setkeyv(dt, "name")
-      } else if ("datetime" %in% cnames) {
+      } else if ("datetime" %in% cols) {
         setkeyv(dt, "datetime")
       }
     }
