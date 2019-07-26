@@ -6,21 +6,24 @@ tus.globals$date_teleplay_fmt <- "%Y%m"
 tus.globals$datetime_fmt <- "%Y-%m-%d %H:%M:%S"
 
 #fixes for R CMD check
-ann_date <- NULL
-cal_date <- NULL
-in_date <- NULL
-ipo_date <- NULL
-issue_date <- NULL
-list_date <- NULL
-out_date <- NULL
-setup_date <- NULL
-trade_time <- NULL
-fgrp <- NULL
-list_date <- NULL
-delist_date <- NULL
-last_ddate <- NULL
-trade_time <- NULL
-i.ts_code <- NULL
-high <- NULL
-low <- NULL
-trade_time <- NULL
+utils::globalVariables(c(
+  "f_ann_date",
+  "ann_date",
+  "cal_date",
+  "in_date",
+  "ipo_date",
+  "issue_date",
+  "list_date",
+  "out_date",
+  "setup_date",
+  "trade_time",
+  "fgrp",
+  "list_date",
+  "delist_date",
+  "last_ddate",
+  "trade_time",
+  "i.ts_code",
+  "high",
+  "low",
+  "trade_time"
+))

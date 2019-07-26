@@ -1,5 +1,6 @@
 #' @import data.table
 #' @import httr
+#' @importFrom utils globalVariables
 NULL
 
 #' @details
