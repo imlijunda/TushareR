@@ -25,5 +25,6 @@ utils::globalVariables(c(
   "i.ts_code",
   "high",
   "low",
-  "trade_time"
+  "trade_time",
+  "..col"
 ))

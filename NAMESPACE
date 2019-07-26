@@ -3,6 +3,7 @@
 S3method("$",tushare_api)
 S3method(print,tushare_api)
 export(GetAPI)
+export(GetToken)
 export(SetToken)
 export(TusRequest)
 export(adj_factor)

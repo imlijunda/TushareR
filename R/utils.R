@@ -1,8 +1,19 @@
 #Auxiliary functions
 
-fix_date <- function(datetime) as.character(datetime, format = tus.globals$date_fmt)
-fix_date_teleplay <- function(datetime) as.character(datetime, format = tus.globals$date_teleplay_fmt)
-
+fix_date <- function(datetime) {
+  if (is.character(datetime) && datetime != "") {
+    datetime <- as.Date(datetime,
+                        tryFormats = c("%Y-%m-%d", "%Y/%m/%d", "%Y%m%d"))
+  }
+  as.character(datetime, format = tus.globals$date_fmt)
+}
+fix_date_teleplay <- function(datetime) {
+  if (is.character(datetime) && datetime != "") {
+    datetime <- as.Date(datetime,
+                        tryFormats = c("%Y-%m-%d", "%Y/%m/%d", "%Y%m%d"))
+  }
+  as.character(datetime, format = tus.globals$date_teleplay_fmt)
+}
 fix_time <- function(datetime) as.character(datetime, format = tus.globals$datetime_fmt)
 
 fix_code <- function(code) toupper(code)

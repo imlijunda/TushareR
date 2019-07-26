@@ -14,69 +14,12 @@
 fut_basic <- function(exchange, fut_type = "",
                       date_format = c("POSIXct", "Date", "char")) {
 
-  date_format <- match.arg(date_format)
+  args <- list(exchange = exchange,
+               fut_type = fut_type,
+               date_format = date_format,
+               api = "fut_basic")
 
-  ans <- TusRequest("fut_basic", exchange = exchange, fut_type = fut_type)
-  if (nrow(ans)) {
-    colfunc <- cast_date(date_format)
-    ans[, list_date := colfunc(list_date)]
-    ans[, delist_date := colfunc(delist_date)]
-    ans[, last_ddate := colfunc(last_ddate)]
-  }
-
-  ans
-}
-
-futures_eod <- function(trade_date = "", symbol = "", start_date = "", end_date = "",
-                        exchange = "", date_format = c("POSIXct", "Date", "char"),
-                        api_name = c("fut_holding", "fut_wsr")) {
-
-  trade_date <- fix_date(trade_date)
-  start_date <- fix_date(start_date)
-  end_date <- fix_date(end_date)
-  date_format <- match.arg(date_format)
-  api_name <- match.arg(api_name)
-
-  ans <- TusRequest(api_name, trade_date = trade_date, symbol = symbol,
-                    start_date = start_date, end_date = end_date,
-                    exchange = exchange)
-  if (nrow(ans)) {
-    colfunc <- cast_date(date_format)
-    ans[, trade_date := colfunc(trade_date)]
-    if (trade_date == "") {
-      data.table::setkeyv(ans, cols = "trade_date")
-    } else {
-      data.table::setkeyv(ans, cols = "symbol")
-    }
-  }
-
-  ans
-}
-
-futures_eod2 <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
-                         exchange = "", date_format = c("POSIXct", "Date", "char"),
-                         api_name = c("fut_daily", "fut_settle")) {
-
-  ts_code <- fix_code(ts_code)
-  trade_date <- fix_date(trade_date)
-  start_date <- fix_date(start_date)
-  end_date <- fix_date(end_date)
-  date_format <- match.arg(date_format)
-  api_name <- match.arg(api_name)
-
-  ans <- TusRequest(api_name, ts_code = ts_code, trade_date = trade_date,
-                    start_date = start_date, end_date = end_date, exchange = exchange)
-  if (nrow(ans)) {
-    colfunc <- cast_date(date_format)
-    ans[, trade_date := colfunc(trade_date)]
-    if (trade_date == "") {
-      data.table::setkeyv(ans, cols = "trade_date")
-    } else {
-      data.table::setkeyv(ans, cols = "ts_code")
-    }
-  }
-
-  ans
+  do.call(market_eod, args)
 }
 
 #' Futures market data.
@@ -100,10 +43,15 @@ futures_eod2 <- function(ts_code = "", trade_date = "", start_date = "", end_dat
 fut_holding <- function(trade_date = "", symbol = "", start_date = "", end_date = "",
                         exchange = "", date_format = c("POSIXct", "Date", "char")) {
 
-  futures_eod(trade_date = trade_date, symbol = symbol,
-              start_date = start_date, end_date = end_date,
-              exchange = exchange, date_format = date_format,
-              api_name = "fut_holding")
+  args <- list(trade_date = trade_date,
+               symbol = symbol,
+               start_date = start_date,
+               end_date = end_date,
+               exchange = exchange,
+               date_format = date_format,
+               api = "fut_holding")
+
+  do.call(market_eod, args)
 }
 
 #' @rdname fut_holding
@@ -112,10 +60,15 @@ fut_holding <- function(trade_date = "", symbol = "", start_date = "", end_date 
 fut_wsr <- function(trade_date = "", symbol = "", start_date = "", end_date = "",
                     exchange = "", date_format = c("POSIXct", "Date", "char")) {
 
-  futures_eod(trade_date = trade_date, symbol = symbol,
-              start_date = start_date, end_date = end_date,
-              exchange = exchange, date_format = date_format,
-              api_name = "fut_wsr")
+  args <- list(trade_date = trade_date,
+               symbol = symbol,
+               start_date = start_date,
+               end_date = end_date,
+               exchange = exchange,
+               date_format = date_format,
+               api = "fut_wsr")
+
+  do.call(market_eod, args)
 }
 
 #' @rdname fut_holding
@@ -132,7 +85,7 @@ fut_daily <- function(ts_code = "", trade_date = "", start_date = "", end_date =
                date_format = date_format,
                api = "fut_daily")
 
-  do.call(futures_eod2, args)
+  do.call(market_eod, args)
 }
 
 #' @rdname fut_holding
@@ -149,5 +102,5 @@ fut_settle <- function(ts_code = "", trade_date = "", start_date = "", end_date 
                date_format = date_format,
                api = "fut_settle")
 
-  do.call(futures_eod2, args)
+  do.call(market_eod, args)
 }

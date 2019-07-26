@@ -2,9 +2,12 @@
 % Please edit documentation in R/request.R
 \name{SetToken}
 \alias{SetToken}
-\title{Set Tushare Pro API token}
+\alias{GetToken}
+\title{Set/Get Tushare Pro API token}
 \usage{
 SetToken(token)
+
+GetToken()
 }
 \arguments{
 \item{token}{a character vector}
@@ -13,8 +16,9 @@ SetToken(token)
 token itself, invisibly.
 }
 \description{
-Set Tushare Pro API token
+Set/Get Tushare Pro API token
 }
 \examples{
 SetToken("YOUR_API_TOKEN")
+GetToken()
 }

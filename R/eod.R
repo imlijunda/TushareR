@@ -1,46 +1,13 @@
-#' Get end-of-day market data.
-#'
-#' @param ts_code Tushare equity code
-#' @param trade_date Trading date
-#' @param start_date Start date
-#' @param end_date End date
-#' @param date_format How to cast datetime columns
-#' @param api actual API function
-#'
-#' @return data.table
-#'
-market_eod <- function(ts_code = "", trade_date = "", start_date = "", end_date = "",
-                       date_format = c("POSIXct", "Date", "char"),
-                       api = c("daily", "weekly", "monthly", "adj_factor",
-                               "daily_basic", "moneyflow", "stk_limit",
-                               "index_daily", "index_weekly", "index_monthly",
-                               "index_weight", "index_dailybasic",
-                               "fund_daily", "fut_daily", "opt_daily")) {
+market_eod <- function(..., api, timeout = 5) {
 
-  ts_code <- fix_code(ts_code)
-  trade_date <- fix_date(trade_date)
-  start_date <- fix_date(start_date)
-  end_date <- fix_date(end_date)
-  date_format <- match.arg(date_format)
-  api <- match.arg(api)
+  x <- GetAPI()
+  dt <- `$.tushare_api`(x, func = force(api))(..., timeout = timeout)
 
-  dt <- TusRequest(api, ts_code = ts_code, trade_date = trade_date,
-                   start_date = start_date, end_date = end_date)
-
-  if (nrow(dt)) {
-    colfunc <- cast_date(date_format)
-    dt[, trade_date := colfunc(trade_date)]
-    if (trade_date == "") {
-      data.table::setkeyv(dt, cols = "trade_date")
-    } else {
-      data.table::setkeyv(dt, cols = "ts_code")
-    }
+  if (nrow(dt) && api == "adj_factor" && all(dt$ts_code == dt$ts_code[1])) {
     #remove duplicated rows of adj_factor
-    if (api == "adj_factor") {
-      dt[, fgrp := data.table::rleid(adj_factor)]
-      dt <- dt[, .SD[1L], by = fgrp][, fgrp := NULL]
-      data.table::setkeyv(dt, cols = "trade_date")
-    }
+    dt[, fgrp := data.table::rleid(adj_factor)]
+    dt <- dt[, .SD[1L], by = fgrp][, fgrp := NULL]
+    data.table::setkeyv(dt, cols = "trade_date")
   }
 
   dt
@@ -66,22 +33,19 @@ intraday <- function(ts_code = "", start_time = "", end_time = "",
                      freq = c("1", "5", "15", "30", "60"),
                      time_format = c("POSIXct", "char")) {
 
-  ts_code <- fix_code(ts_code)
-  start_time <- fix_time(start_time)
-  end_time <- fix_time(end_time)
-  freq <- match.arg(freq)
-  time_format <- match.arg(time_format)
 
-  dt <- TusRequest("mins", ts_code = ts_code, start_time = start_time, end_time = end_time,
-                   freq = paste0(freq, "min"))
+  freq <- paste0(match.arg(as.character(freq),
+                           choices = c("1", "5", "15", "30", "60")),
+                 "min")
 
-  if (nrow(dt)) {
-    colfunc <- cast_time(time_format)
-    dt[, trade_time := colfunc(trade_time)]
-    data.table::setkeyv(dt, cols = "trade_time")
-  }
+  args <- list(ts_code = ts_code,
+               start_time = start_time,
+               end_time = end_time,
+               freq = freq,
+               time_format = time_format,
+               api = "daily")
 
-  dt
+  do.call(market_eod, args)
 }
 
 #' Suspend information
@@ -101,26 +65,13 @@ intraday <- function(ts_code = "", start_time = "", end_time = "",
 suspend <- function(ts_code = "", suspend_date = "", resume_date="",
                     date_format = c("POSIXct", "Date", "char")) {
 
-  ts_code <- fix_code(ts_code)
-  suspend_date <- fix_date(suspend_date)
-  resume_date <- fix_date(resume_date)
-  date_format <- match.arg(date_format)
+  args <- list(ts_code = ts_code,
+               suspend_date = suspend_date,
+               resume_date = resume_date,
+               date_format = date_format,
+               api = "suspend")
 
-  dt <- TusRequest("suspend", ts_code = ts_code, suspend_date = suspend_date,
-                   resume_date = resume_date)
-
-  if (nrow(dt)) {
-    colfunc <- cast_date(date_format)
-    dt[, suspend_date := colfunc(suspend_date)]
-    dt[, resume_date := colfunc(resume_date)]
-    if (suspend_date == "") {
-      data.table::setkeyv(dt, cols = "ts_code")
-    } else {
-      data.table::setkeyv(dt, cols = "suspend_date")
-    }
-  }
-
-  dt
+  do.call(market_eod, args)
 }
 
 #' End-of-day market data.
