@@ -69,7 +69,7 @@ do.retry <- function(what, args, quote = FALSE, envir = parent.frame(),
   }
 
   msg <- do.call(paste0, args = as.list(
-    as.character(deparse(what))
+    as.character(deparse(substitute(what)))
   ))
   stop(sprintf("Calling %s failed after %d attempts.", msg, attempt), call. = FALSE)
 }
