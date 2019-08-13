@@ -6,7 +6,7 @@
 \usage{
 intraday(ts_code = "", start_time = "", end_time = "",
   freq = c("1", "5", "15", "30", "60"), time_format = c("POSIXct",
-  "char"))
+  "char"), ...)
 }
 \arguments{
 \item{ts_code}{Tushare equity code}
@@ -18,6 +18,8 @@ intraday(ts_code = "", start_time = "", end_time = "",
 \item{freq}{frequency of intraday data}
 
 \item{time_format}{How to cast datetime columns?}
+
+\item{...}{futher arguments passed}
 }
 \value{
 data.table

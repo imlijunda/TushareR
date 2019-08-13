@@ -5,7 +5,7 @@
 \title{Suspend information}
 \usage{
 suspend(ts_code = "", suspend_date = "", resume_date = "",
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 }
 \arguments{
 \item{ts_code}{OPTIONAL, Tushare equity code.}
@@ -15,6 +15,8 @@ suspend(ts_code = "", suspend_date = "", resume_date = "",
 \item{resume_date}{OPTIONAL, resume date in YYYYmmdd format or Date/POSIXct object.}
 
 \item{date_format}{How to cast return datetime columns? Default casts values to POSIXct objects.}
+
+\item{...}{futher arguments passed}
 }
 \value{
 a data.frame/data.table

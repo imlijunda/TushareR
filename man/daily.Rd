@@ -18,46 +18,46 @@
 \title{End-of-day market data.}
 \usage{
 daily(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 weekly(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 monthly(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 daily_basic(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 adj_factor(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 moneyflow(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 stk_limit(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 fund_daily(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 opt_daily(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 index_daily(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 index_weekly(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 index_monthly(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 index_weight(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 
 index_dailybasic(ts_code = "", trade_date = "", start_date = "",
-  end_date = "", date_format = c("POSIXct", "Date", "char"))
+  end_date = "", date_format = c("POSIXct", "Date", "char"), ...)
 }
 \arguments{
 \item{ts_code}{OPTIONAL, Tushare equity code.}
@@ -69,6 +69,8 @@ index_dailybasic(ts_code = "", trade_date = "", start_date = "",
 \item{end_date}{OPTIONAL, end date of returned date.}
 
 \item{date_format}{How to cast return datetime columns? Default casts values to POSIXct objects.}
+
+\item{...}{futher arguments passed}
 }
 \value{
 a data.frame/data.table

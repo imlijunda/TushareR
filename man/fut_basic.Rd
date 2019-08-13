@@ -5,7 +5,7 @@
 \title{Get basic info of futures contracts.}
 \usage{
 fut_basic(exchange, fut_type = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 }
 \arguments{
 \item{exchange}{Future exchagne centre.}
@@ -13,6 +13,8 @@ fut_basic(exchange, fut_type = "", date_format = c("POSIXct", "Date",
 \item{fut_type}{Type of futures.}
 
 \item{date_format}{How to cast datetime format.}
+
+\item{...}{futher arguments passed}
 }
 \value{
 data.frame/data.table

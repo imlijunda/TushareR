@@ -20,63 +20,63 @@
 \usage{
 income(ts_code = "", ann_date = "", start_date = "", end_date = "",
   period = "", report_type = "", comp_type = "",
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 income_vip(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", report_type = "", comp_type = "",
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 balancesheet(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", report_type = "", comp_type = "",
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 balancesheet_vip(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", report_type = "", comp_type = "",
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 cashflow(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", report_type = "", comp_type = "",
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 cashflow_vip(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", report_type = "", comp_type = "",
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 forecast(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 forecast_vip(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 express(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 express_vip(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 fina_indicator(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 fina_indicator_vip(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 fina_audit(ts_code = "", ann_date = "", start_date = "",
   end_date = "", period = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 fina_mainbz(ts_code = "", period = "", type = c("", "P", "D"),
   start_date = "", end_date = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 fina_mainbz_vip(ts_code = "", period = "", type = c("", "P", "D"),
   start_date = "", end_date = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 }
 \arguments{
 \item{ts_code}{OPTIONAL, Tushare equity code.}
@@ -94,6 +94,10 @@ fina_mainbz_vip(ts_code = "", period = "", type = c("", "P", "D"),
 \item{comp_type}{OPTIONAL, report company type. Please refer to online API document.}
 
 \item{date_format}{How to cast return datetime columns? Default casts values to POSIXct objects.}
+
+\item{...}{further arguments passed}
+
+\item{type}{OPTIONAL, business type.}
 }
 \value{
 a data.frame/data.table

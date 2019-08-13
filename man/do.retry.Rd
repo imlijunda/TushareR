@@ -16,11 +16,11 @@ do.retry(what, args, quote = FALSE, envir = parent.frame(),
 
 \item{envir}{passed to do.call}
 
+\item{attempt}{max number of attempts}
+
 \item{sleep}{sleep time between attempts}
 
 \item{warn}{whether to throw warning when error captured, or an error handling function}
-
-\item{retry}{total number of attempts}
 }
 \value{
 The returned value from function call

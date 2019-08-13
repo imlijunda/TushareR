@@ -11,25 +11,26 @@
 \usage{
 stock_basic(is_hs = c("", "N", "H", "S"), list_status = c("", "L", "D",
   "P"), exchange = c("", "SSE", "SZSE", "HKEX"),
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 trade_cal(exchange = c("", "SSE", "SZSE"), start_date = "",
-  end_date = "", is_open, date_format = c("POSIXct", "Date", "char"))
+  end_date = "", is_open, date_format = c("POSIXct", "Date", "char"),
+  ...)
 
 hs_const(hs_type = c("SH", "SZ"), is_new = c("1", "0"),
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 namechange(ts_code = "", start_date = "", end_date = "",
-  date_format = c("POSIXct", "Date", "char"))
+  date_format = c("POSIXct", "Date", "char"), ...)
 
 stock_company(exchange = c("SSE", "SZSE"), date_format = c("POSIXct",
-  "Date", "char"))
+  "Date", "char"), ...)
 
 new_share(start_date = "", end_date = "", date_format = c("POSIXct",
-  "Date", "char"))
+  "Date", "char"), ...)
 }
 \arguments{
-\item{is_hs}{Flag for Shenzhen/Shanghai-Hong Kong Stock Connect}
+\item{is_hs}{Flag for Shenzhen/Shanghai-Hong Kong Stock Connect#'}
 
 \item{list_status}{List status}
 
@@ -37,11 +38,13 @@ new_share(start_date = "", end_date = "", date_format = c("POSIXct",
 
 \item{date_format}{How to cast datetime format.}
 
+\item{...}{futher arguments passed}
+
 \item{start_date}{Start date}
 
 \item{end_date}{End date}
 
-\item{is_open}{Wheter the market is open}
+\item{is_open}{Whether the market is open}
 
 \item{hs_type}{Type of Shenzhen/Shanghai-Hong Kong Stock Connect}
 

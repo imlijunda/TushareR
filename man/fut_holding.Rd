@@ -9,19 +9,19 @@
 \usage{
 fut_holding(trade_date = "", symbol = "", start_date = "",
   end_date = "", exchange = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 fut_wsr(trade_date = "", symbol = "", start_date = "",
   end_date = "", exchange = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 fut_daily(ts_code = "", trade_date = "", start_date = "",
   end_date = "", exchange = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 
 fut_settle(ts_code = "", trade_date = "", start_date = "",
   end_date = "", exchange = "", date_format = c("POSIXct", "Date",
-  "char"))
+  "char"), ...)
 }
 \arguments{
 \item{trade_date}{OPTIONAL, trading date.}
@@ -35,6 +35,8 @@ fut_settle(ts_code = "", trade_date = "", start_date = "",
 \item{exchange}{OPTIONAL, Future exchange centre.}
 
 \item{date_format}{How to cast datetime format.}
+
+\item{...}{futher argument passed}
 
 \item{ts_code}{OPTIONAL, Tushare equity code.}
 }
