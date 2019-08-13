@@ -25,7 +25,9 @@ get_finance <- function(..., api, timeout = 15) {
 #' @param period OPTIONAL, report period.
 #' @param report_type OPTIONAL, report type. Please refer to online API document.
 #' @param comp_type OPTIONAL, report company type. Please refer to online API document.
+#' @param type OPTIONAL, business type.
 #' @param date_format How to cast return datetime columns? Default casts values to POSIXct objects.
+#' @param ... further arguments passed
 #'
 #' @return a data.frame/data.table
 #' @export
@@ -36,7 +38,7 @@ get_finance <- function(..., api, timeout = 15) {
 #' }
 income <- function(ts_code = "", ann_date = "", start_date = "", end_date = "",
                    period = "", report_type = "", comp_type = "",
-                   date_format = c("POSIXct", "Date", "char")) {
+                   date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -47,8 +49,9 @@ income <- function(ts_code = "", ann_date = "", start_date = "", end_date = "",
                comp_type = comp_type,
                date_format = date_format,
                api = "income")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -56,7 +59,7 @@ income <- function(ts_code = "", ann_date = "", start_date = "", end_date = "",
 #'
 income_vip <- function(ts_code = "", ann_date = "", start_date = "", end_date = "",
                        period = "", report_type = "", comp_type = "",
-                       date_format = c("POSIXct", "Date", "char")) {
+                       date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -67,8 +70,9 @@ income_vip <- function(ts_code = "", ann_date = "", start_date = "", end_date = 
                comp_type = comp_type,
                date_format = date_format,
                api = "income_vip")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -76,7 +80,7 @@ income_vip <- function(ts_code = "", ann_date = "", start_date = "", end_date = 
 #'
 balancesheet <- function(ts_code = "", ann_date = "", start_date = "", end_date = "",
                        period = "", report_type = "", comp_type = "",
-                       date_format = c("POSIXct", "Date", "char")) {
+                       date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -87,8 +91,9 @@ balancesheet <- function(ts_code = "", ann_date = "", start_date = "", end_date 
                comp_type = comp_type,
                date_format = date_format,
                api = "balancesheet")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -96,7 +101,7 @@ balancesheet <- function(ts_code = "", ann_date = "", start_date = "", end_date 
 #'
 balancesheet_vip <- function(ts_code = "", ann_date = "", start_date = "", end_date = "",
                          period = "", report_type = "", comp_type = "",
-                         date_format = c("POSIXct", "Date", "char")) {
+                         date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -107,8 +112,9 @@ balancesheet_vip <- function(ts_code = "", ann_date = "", start_date = "", end_d
                comp_type = comp_type,
                date_format = date_format,
                api = "balancesheet_vip")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -116,7 +122,7 @@ balancesheet_vip <- function(ts_code = "", ann_date = "", start_date = "", end_d
 #'
 cashflow <- function(ts_code = "", ann_date = "", start_date = "", end_date = "",
                      period = "", report_type = "", comp_type = "",
-                     date_format = c("POSIXct", "Date", "char")) {
+                     date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -127,8 +133,9 @@ cashflow <- function(ts_code = "", ann_date = "", start_date = "", end_date = ""
                comp_type = comp_type,
                date_format = date_format,
                api = "cashflow")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -136,7 +143,7 @@ cashflow <- function(ts_code = "", ann_date = "", start_date = "", end_date = ""
 #'
 cashflow_vip <- function(ts_code = "", ann_date = "", start_date = "", end_date = "",
                          period = "", report_type = "", comp_type = "",
-                         date_format = c("POSIXct", "Date", "char")) {
+                         date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -147,8 +154,9 @@ cashflow_vip <- function(ts_code = "", ann_date = "", start_date = "", end_date 
                comp_type = comp_type,
                date_format = date_format,
                api = "cashflow_vip")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -156,7 +164,7 @@ cashflow_vip <- function(ts_code = "", ann_date = "", start_date = "", end_date 
 #'
 forecast <- function(ts_code = "", ann_date = "",
                      start_date = "", end_date = "", period = "",
-                     date_format = c("POSIXct", "Date", "char")) {
+                     date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -165,8 +173,9 @@ forecast <- function(ts_code = "", ann_date = "",
                period = period,
                date_format = date_format,
                api = "forecast")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -174,7 +183,7 @@ forecast <- function(ts_code = "", ann_date = "",
 #'
 forecast_vip <- function(ts_code = "", ann_date = "",
                          start_date = "", end_date = "", period = "",
-                         date_format = c("POSIXct", "Date", "char")) {
+                         date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -183,8 +192,9 @@ forecast_vip <- function(ts_code = "", ann_date = "",
                period = period,
                date_format = date_format,
                api = "forecast_vip")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -192,7 +202,7 @@ forecast_vip <- function(ts_code = "", ann_date = "",
 #'
 express <- function(ts_code = "", ann_date = "",
                     start_date = "", end_date = "", period = "",
-                    date_format = c("POSIXct", "Date", "char")) {
+                    date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -201,8 +211,9 @@ express <- function(ts_code = "", ann_date = "",
                period = period,
                date_format = date_format,
                api = "express")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -210,7 +221,7 @@ express <- function(ts_code = "", ann_date = "",
 #'
 express_vip <- function(ts_code = "", ann_date = "",
                         start_date = "", end_date = "", period = "",
-                        date_format = c("POSIXct", "Date", "char")) {
+                        date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -219,8 +230,9 @@ express_vip <- function(ts_code = "", ann_date = "",
                period = period,
                date_format = date_format,
                api = "express_vip")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -228,7 +240,7 @@ express_vip <- function(ts_code = "", ann_date = "",
 #'
 fina_indicator <- function(ts_code = "", ann_date = "",
                            start_date = "", end_date = "", period = "",
-                           date_format = c("POSIXct", "Date", "char")) {
+                           date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -237,8 +249,9 @@ fina_indicator <- function(ts_code = "", ann_date = "",
                period = period,
                date_format = date_format,
                api = "fina_indicator")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -246,7 +259,7 @@ fina_indicator <- function(ts_code = "", ann_date = "",
 #'
 fina_indicator_vip <- function(ts_code = "", ann_date = "",
                                start_date = "", end_date = "", period = "",
-                               date_format = c("POSIXct", "Date", "char")) {
+                               date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -255,8 +268,9 @@ fina_indicator_vip <- function(ts_code = "", ann_date = "",
                period = period,
                date_format = date_format,
                api = "fina_indicator_vip")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -264,7 +278,7 @@ fina_indicator_vip <- function(ts_code = "", ann_date = "",
 #'
 fina_audit <- function(ts_code = "", ann_date = "",
                            start_date = "", end_date = "", period = "",
-                           date_format = c("POSIXct", "Date", "char")) {
+                           date_format = c("POSIXct", "Date", "char"), ...) {
 
   args <- list(ts_code = ts_code,
                ann_date = ann_date,
@@ -273,8 +287,9 @@ fina_audit <- function(ts_code = "", ann_date = "",
                period = period,
                date_format = date_format,
                api = "fina_audit")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -282,7 +297,7 @@ fina_audit <- function(ts_code = "", ann_date = "",
 #'
 fina_mainbz <- function(ts_code = "", period = "", type = c("", "P", "D"),
                         start_date = "", end_date = "",
-                        date_format = c("POSIXct", "Date", "char")) {
+                        date_format = c("POSIXct", "Date", "char"), ...) {
 
   type = match.arg(type)
 
@@ -293,8 +308,9 @@ fina_mainbz <- function(ts_code = "", period = "", type = c("", "P", "D"),
                end_date = end_date,
                date_format = date_format,
                api = "fina_mainbz")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }
 
 #' @rdname income
@@ -302,7 +318,7 @@ fina_mainbz <- function(ts_code = "", period = "", type = c("", "P", "D"),
 #'
 fina_mainbz_vip <- function(ts_code = "", period = "", type = c("", "P", "D"),
                             start_date = "", end_date = "",
-                            date_format = c("POSIXct", "Date", "char")) {
+                            date_format = c("POSIXct", "Date", "char"), ...) {
 
   type = match.arg(type)
 
@@ -313,6 +329,7 @@ fina_mainbz_vip <- function(ts_code = "", period = "", type = c("", "P", "D"),
                end_date = end_date,
                date_format = date_format,
                api = "fina_mainbz")
+  dots <- list(...)
 
-  do.call(get_finance, args)
+  do.call(get_finance, c(args, dots))
 }

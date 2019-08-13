@@ -50,10 +50,10 @@ cast_logical01 <- function(x) {
 
   ans <- vector(mode = "logical", length = length(x))
   if (is.character(x)) {
-    idx <- which(x == "1" | x == "Y")
+    idx <- x == "1" | x == "Y"
     ans[idx] <- TRUE
   } else {
-    idx <- which(x != 0)
+    idx <- x != 0
     ans[idx] <- TRUE
   }
 

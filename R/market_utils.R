@@ -21,12 +21,6 @@
 #' }
 adjusted_ohlc <- function(values, factors, adjust = c("qfq", "hfq")) {
 
-  #fix R cmd check, these are not defined in zzz.R since they are exported/base
-  #functions
-  adj_factor <- NULL
-  open <- NULL
-  close <- NULL
-
   f <- data.table::copy(factors)
   adjust <- match.arg(adjust)
   if (adjust == "qfq") {

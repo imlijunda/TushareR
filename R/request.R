@@ -32,7 +32,7 @@ GetToken <- function() {
 #' @param args passed to do.call
 #' @param quote passed to do.call
 #' @param envir passed to do.call
-#' @param retry total number of attempts
+#' @param attempt max number of attempts
 #' @param sleep sleep time between attempts
 #' @param warn whether to throw warning when error captured, or an error handling function
 #'

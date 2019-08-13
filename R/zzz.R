@@ -26,5 +26,10 @@ utils::globalVariables(c(
   "high",
   "low",
   "trade_time",
-  "..col"
+  "..col",
+  "adj_factor",
+  "open",
+  "close",
+  "comp_type",
+  "report_type"
 ))
