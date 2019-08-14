@@ -44,7 +44,7 @@ intraday <- function(ts_code = "", start_time = "", end_time = "",
                end_time = end_time,
                freq = freq,
                time_format = time_format,
-               api = "daily")
+               api = "mins")
   dots <- list(...)
 
   do.call(market_eod, c(args, dots))
