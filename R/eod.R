@@ -47,7 +47,9 @@ intraday <- function(ts_code = "", start_time = "", end_time = "",
                api = "mins")
   dots <- list(...)
 
-  do.call(market_eod, c(args, dots))
+  dt <- do.call(market_eod, c(args, dots))
+  #fix possible duplicated data points
+  unique(dt, by = "trade_time")
 }
 
 #' Suspend information
