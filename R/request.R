@@ -78,6 +78,7 @@ do.retry <- function(what, args, quote = FALSE, envir = parent.frame(),
 #'
 #' @param api_name name of API function, please refer to online document for more information.
 #' @param ... passed to API function.
+#' @param fields data fields to request
 #' @param token API token.
 #' @param timeout timeout in seconds for httr request.
 #'
@@ -88,14 +89,15 @@ do.retry <- function(what, args, quote = FALSE, envir = parent.frame(),
 #' \dontrun{
 #' top10 <- TusRequest("top10_holders", ts_code = "000001.SZ")
 #' }
-TusRequest <- function(api_name, ..., token = GetToken(), timeout = 10.0) {
+TusRequest <- function(api_name, ..., fields = c(""), token = GetToken(), timeout = 10.0) {
 
   api_url <- "http://api.waditu.com"
 
   args <- list(
     token = token,
     api_name = api_name,
-    params = list(...)
+    params = list(...),
+    fields = fields
   )
 
   post_args <- list(
