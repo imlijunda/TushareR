@@ -43,7 +43,7 @@ arg_date <- c("start_date", "end_date", "trade_date", "suspend_date", "resume_da
 arg_time <- c("start_time", "end_time", "trade_time", "datetime", "pub_time")
 
 arg_logical01 <- c("is_open", "is_new", "is_audit", "is_release", "is_buyback",
-                    "is_ct")
+                    "is_ct", "update_flag")
 
 #' Dynamic Tushare API functions
 #'
